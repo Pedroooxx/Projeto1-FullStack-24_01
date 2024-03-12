@@ -20,8 +20,9 @@
 
     <p><span>Exercício 4: </span> Extenda o exercício anterior, mas no elemento input, deve ser implementada uma função de busca pelas Strings que começarem com as mesmas letras inseridas no input. Utilize o método filter do Array.</p>
     <p>
-      <input type="text">
+      <input id="ex4" onkeyup="fex4(this.value)" onkeydown="fex4(this.value)" type="text"">
     </p>
+    <ul id="list4"></ul>
 
     <p><span>Exercício 5: </span> extenda o exercício anterior, armazene os valores do vetor dentro de objetos JavaScript com as propriedades nome como valor da String e checked como um booleano de valor false. O valor da variável booleana deve ser apresentado em um checkbox dentro do elemento li. Se o checkbox for clicado, o checkbox deve ser checado e o valor tem que ser refletido no vetor de valores (como uma TodoList). Utilize o método map do Array.</p>
 
@@ -47,11 +48,43 @@
         list.innerHTML = listItem.innerHTML;
       }
 
+      const array1 = ['Abacate', 'Uva', 'Maracujá', 'Mamão', 'Cereja', 'Jaboticaba', 'Jaca', 'Guaraná'];
+
       (function fex3(){
-        const array1 = ['Abacate', 'Uva', 'Maracujá', 'Mamão', 'Cereja', 'Jaboticaba', 'Jaca', 'Guaraná'];
+        
         var list = document.getElementById("list3");
-        array1.forEach(list.appendChild());
+        array1.forEach((element, index) => {
+            var listItem = document.createElement("LI");
+            listItem.innerHTML = `Fruta ${index}: ${element}`;
+            list.appendChild(listItem)
+        });
       })()
+
+      function fex4(filterInput){
+
+        var list = document.getElementById("list4");
+
+        list.innerHTML = "";
+        
+        const filteredArray = array1.filter(element => element.toLowerCase().startsWith(filterInput.toLowerCase()));
+        
+        filteredArray.forEach((element, index) => {
+          var listItem = document.createElement("li");
+          listItem.innerHTML = `Fruta ${index}: ${element}`;
+          list4.appendChild(listItem);
+        });
+      }
+
+      (function fex5(){
+
+        size = array1.length
+        
+        
+        
+
+
+      })();
+      
 
     </script>
 </body>

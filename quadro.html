@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Frutas</title>
+</head>
+<body>
+  <input type="text" id="searchInput" placeholder="Digite as letras..." onkeyup="updateList(this.value)">
+  <ul id="list3"></ul>
+  <ul id="filteredlist"></ul>
+
+  <script>
+    (function fex3(){
+      const array1 = ['Abacate', 'Uva', 'Maracujá', 'Mamão', 'Cereja', 'Jaboticaba', 'Jaca', 'Guaraná'];
+      var list = document.getElementById("list3");
+      var filteredList = document.getElementById("filteredlist");
+      
+      function updateList(filterText) {
+        filteredList.innerHTML = ""; // Limpa a lista antes de atualizar
+
+        const filteredArray = array1.filter(element => element.toLowerCase().startsWith(filterText.toLowerCase()));
+        
+        filteredArray.forEach((element, index) => {
+          var listItem = document.createElement("li");
+          listItem.innerHTML = `Fruta ${index}: ${element}`;
+          filteredList.appendChild(listItem);
+        });
+      }
+
+      // Inicialmente, exibe a lista completa
+      array1.forEach((element, index) => {
+        var listItem = document.createElement("li");
+        listItem.innerHTML = `Fruta ${index}: ${element}`;
+        list.appendChild(listItem);
+      });
+    })();
+  </script>
+</body>
+</html>
