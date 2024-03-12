@@ -1,40 +1,161 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Frutas</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Exercícios sobre JS, ES6, Contexto e OO</title>
+  <style type="text/css" media="all">
+    p>span {
+      font-weight: bold;
+    }
+  </style>
 </head>
+
 <body>
-  <input type="text" id="searchInput" placeholder="Digite as letras..." onkeyup="updateList(this.value)">
-  <ul id="list3"></ul>
-  <ul id="filteredlist"></ul>
+  <h1>Exercícios sobre JS, ES6, Contexto e OO</h1>
+
+  <p><span>Exercício 1: </span> implemente uma função que ao clicar no botão exercício 1 a seguir, insira o valor do
+    input como um elemento li no elemento ul a seguir. Utilize o conceito de <a
+      href="http://es6-features.org/#StringInterpolation">string interpolation</a></p>
+  <p>
+    <input id="content01" type="text">
+    <button onclick=handleEx01()>exercício 1</button>
+  </p>
+  <ul id="list01"></ul>
+
+  <p><span>Exercício 2: </span> implemente uma função que atualize o valor do elemento li, enquanto o usuário digita.
+    Utilize o evento keyup ou keydown.</p>
+  <p>
+    <input id="content02" onkeydown=handleEx02() onkeyup=handleEx02() type="text">
+  </p>
+  <ul id="list02"></ul>
+
+  <p><span>Exercício 3: </span> implemente uma função que receba como parâmetro um vetor com os seguintes valores de
+    tipo String: abacate, uva, maracujá, mamão, cereja, jaboticaba, jaca, guaraná. Para cade elemento do vetor, deve ser
+    gerado um elemento li com o valor da String; e inserido no elemento ul a seguir. Utilize o método forEach do Array.
+  </p>
+  <ul id="list03"></ul>
+
+  <p><span>Exercício 4: </span> Extenda o exercício anterior, mas no elemento input, deve ser implementada uma função de
+    busca pelas Strings que começarem com as mesmas letras inseridas no input. Utilize o método filter do Array.</p>
+  <p>
+    <input id="input04" type="text">
+  </p>
+
+  <p><span>Exercício 5: </span> extenda o exercício anterior, armazene os valores do vetor dentro de objetos JavaScript
+    com as propriedades nome como valor da String e checked como um booleano de valor false. O valor da variável
+    booleana deve ser apresentado em um checkbox dentro do elemento li. Se o checkbox for clicado, o checkbox deve ser
+    checado e o valor tem que ser refletido no vetor de valores (como uma TodoList). Utilize o método map do Array.</p>
+  <ul id="list05"></ul>
+
+  <p><span>Exercício 6: </span> extenda o exercício anterior, e apresente o elemento p a seguir o número de elementos do
+    vetor que foram checados. Utilize o método filter ou reduce do Array.</p>
+  <p id="checkedCount"></p>
+
+  <p><span>Exercício 7: </span> encapsule toda a lógica dos exercícios anteriores (3-6) dentro de uma classe, utilizando
+    o conceito de closures ou classes do ES6. Implemente uma funcionalidade de inserção de novos elementos na lista.</p>
+
 
   <script>
-    (function fex3(){
-      const array1 = ['Abacate', 'Uva', 'Maracujá', 'Mamão', 'Cereja', 'Jaboticaba', 'Jaca', 'Guaraná'];
-      var list = document.getElementById("list3");
-      var filteredList = document.getElementById("filteredlist");
-      
-      function updateList(filterText) {
-        filteredList.innerHTML = ""; // Limpa a lista antes de atualizar
 
-        const filteredArray = array1.filter(element => element.toLowerCase().startsWith(filterText.toLowerCase()));
-        
-        filteredArray.forEach((element, index) => {
-          var listItem = document.createElement("li");
-          listItem.innerHTML = `Fruta ${index}: ${element}`;
-          filteredList.appendChild(listItem);
-        });
-      }
-
-      // Inicialmente, exibe a lista completa
-      array1.forEach((element, index) => {
-        var listItem = document.createElement("li");
-        listItem.innerHTML = `Fruta ${index}: ${element}`;
+    const handleEx01 = () => {
+        const content = document.getElementById("content01").value;
+        const list = document.getElementById("list01");
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `Item ${content};`;
         list.appendChild(listItem);
-      });
-    })();
+      };
+      
+      const handleEx02 = () => {
+        const content = document.getElementById("content02").value;
+        const list = document.getElementById("list02");
+        const listItem = document.createElement("li");
+        listItem.innerHTML = content;
+        list.innerHTML = listItem.innerHTML;
+      };
+      
+      const array = [
+        "abacate",
+        "uva",
+        "maracujá",
+        "mamão",
+        "cereja",
+        "jaboticaba",
+        "jaca",
+        "guaraná",
+      ];
+      
+      const list03 = document.getElementById("list03");
+      
+      const handleEx03 = () => {
+        array.forEach((element) => {
+          const li = document.createElement("li");
+          li.textContent = element;
+          list03.appendChild(li);
+        });
+      };
+      
+      const handleEx04 = () => {
+        const input = document.getElementById("input04");
+      
+        input.addEventListener("input", () => {
+          const filterValue = input.value.toLowerCase();
+      
+          // Limpa a lista antes de aplicar o filtro novamente
+          list03.innerHTML = "";
+      
+          array
+            .filter((element) => element.toLowerCase().startsWith(filterValue))
+            .forEach((element) => {
+              const li = document.createElement("li");
+              li.textContent = element;
+              list03.appendChild(li);
+            });
+        });
+      };
+      
+      const arrayObjects = array.map((element) => ({
+        name: element,
+        checked: false,
+      }));
+      
+      const list05 = document.getElementById("list05");
+      
+      const handleEx05 = () => {
+        list05.innerHTML = "";
+      
+        arrayObjects.forEach((object, index) => {
+          const li = document.createElement("li");
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.checked = object.checked;
+          checkbox.addEventListener("change", (event) => {
+            arrayObjects[index].checked = event.target.checked;
+            handleEx06();
+          });
+          const label = document.createElement("label");
+          label.textContent = object.name;
+          li.appendChild(checkbox);
+          li.appendChild(label);
+          list05.appendChild(li);
+        });
+      };
+      
+      const checkedCount = document.getElementById("checkedCount");
+      
+      const handleEx06 = () => {
+        const checkedItems = arrayObjects.filter((object) => object.checked);
+        checkedCount.textContent = `Número de elementos checados: ${checkedItems.length}`;
+      };
+      
+      handleEx03();
+      handleEx04();
+      handleEx05();
+      handleEx06();
+
   </script>
+
+
+
 </body>
+
 </html>

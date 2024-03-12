@@ -25,6 +25,7 @@
     <ul id="list4"></ul>
 
     <p><span>Exercício 5: </span> extenda o exercício anterior, armazene os valores do vetor dentro de objetos JavaScript com as propriedades nome como valor da String e checked como um booleano de valor false. O valor da variável booleana deve ser apresentado em um checkbox dentro do elemento li. Se o checkbox for clicado, o checkbox deve ser checado e o valor tem que ser refletido no vetor de valores (como uma TodoList). Utilize o método map do Array.</p>
+    <ul id="list5"></ul>
 
     <p><span>Exercício 6: </span> extenda o exercício anterior, e apresente o elemento p a seguir o número de elementos do vetor que foram checados. Utilize o método filter ou reduce do Array.</p>
 
@@ -75,14 +76,29 @@
         });
       }
 
+      var frutas = array1.map((element, index) => {
+        return {nome: element, checked: false}
+      });
+
       (function fex5(){
 
-        size = array1.length
-        
-        
-        
+        var list = document.getElementById("list5");
 
+        frutas.forEach((element, index) => {
 
+            var checkBox = document.createElement("input");
+            var listItem = document.createElement("LI");
+            var label = document.createElement("label");
+            label.textContent = element.nome;
+
+            checkBox.type = "checkbox";
+            checkBox.checked = element.checked;
+            
+            listItem.appendChild(checkBox);
+            listItem.appendChild(label);
+            list.appendChild(listItem);
+        })
+          
       })();
       
 
