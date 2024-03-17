@@ -28,7 +28,11 @@
     <ul id="list5"></ul>
 
     <p><span>Exercício 6: </span> extenda o exercício anterior, e apresente o elemento p a seguir o número de elementos do vetor que foram checados. Utilize o método filter ou reduce do Array.</p>
+<<<<<<< HEAD
     <p id="checkedCount"></p>
+=======
+    <p></p>
+>>>>>>> ff727b8e5eabea70c07943452eb8c3c84f218037
 
     <p><span>Exercício 7: </span> encapsule toda a lógica dos exercícios anteriores (3-6) dentro de uma classe, utilizando o conceito de closures ou classes do ES6. Implemente uma funcionalidade de inserção de novos elementos na lista.</p>
 
@@ -57,7 +61,7 @@
         var list = document.getElementById("list3");
         array1.forEach((element, index) => {
             var listItem = document.createElement("LI");
-            listItem.innerHTML = `Fruta ${index}: ${element}`;
+            listItem.innerHTML = `Fruta ${index + 1}: ${element}`;
             list.appendChild(listItem)
         });
       })()
@@ -72,7 +76,7 @@
         
         filteredArray.forEach((element, index) => {
           var listItem = document.createElement("li");
-          listItem.innerHTML = `Fruta ${index}: ${element}`;
+          listItem.innerHTML = `Fruta ${index + 1}: ${element}`;
           list4.appendChild(listItem);
         });
       }
@@ -102,6 +106,7 @@
           
       })();
 
+<<<<<<< HEAD
       function fex6(){
 
 
@@ -109,6 +114,13 @@
 
 
       }
+=======
+      (function fex6(){
+
+        
+          
+      })();
+>>>>>>> ff727b8e5eabea70c07943452eb8c3c84f218037
       
 
     </script>
