@@ -8,9 +8,9 @@
     }
 
     function showCharacter(character){
-        let characterList = document.getElementById("characterList");
+        let characterList = document.getElementById("character");
         let characterName = document.createElement("LI");
         characterName.innerHTML = `Personagem: ${character.firstName}`;
-        console.log(characterName);
+        console.log(character);
         characterList.appendChild(characterName);
     }
