@@ -38,17 +38,16 @@
 
     function showCharacterList(characterList){
 
-        //não pronto -> necessario concluir para cada personagem e criar um ciclo para que abranja todos da lista
+        var list = document.querySelector("#characterList");
 
-        /*let characterList = document.getElementById("characterList");
+        //document.querySelector('#ex3')
 
-        let characterName = document.getElementById("characterName");
-        characterName.innerHTML = `${character.firstName} ${character.lastName}`;
-
-        let characterId = document.getElementById("characterId");
-        characterId.innerHTML = `${character.id}`;
-
-        var listItem = document.createElement("LI");
-        listItem.innerHTML = `${}`;*/
+        characterList.forEach((element, index) => {
+            
+            var listItem = document.createElement("LI");
+            listItem.className = "characterListItem"
+            listItem.innerHTML = `${index} ${element.fullName}`;
+            list.appendChild(listItem)
+        });
 
     }
