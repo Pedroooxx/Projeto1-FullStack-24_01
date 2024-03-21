@@ -204,12 +204,14 @@
 
     /*-----ARRUMAR-----*/
 
-    /*#content2 {
+    #content2 {
         width:100%;
+        /*
         justify-content: center;
         align-items: center;
         align-content: center;
-    }*/
+        */
+    }
     .txtType2 {
         justify-content: center;
     }
