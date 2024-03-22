@@ -4,15 +4,24 @@
 
     function getCharacter(){
         let input = document.getElementById("inputArea1").value;
+        let list = document.querySelector("#characterList");
 
-        fetch(`https://thronesapi.com/api/v2/Characters/${input}`).then((resp) => resp.json())
-        .then((character) => showCharacter(character));
+        list.forEach((element, index) => {
+            
+            
+        });
+
+
+        return showCharacter(character);
+        /*fetch(`https://thronesapi.com/api/v2/Characters/${input}`).then((resp) => resp.json())
+        .then((character) => showCharacter(character));*/
     }
 
     (function getCharacterList(){
 
         fetch(`https://thronesapi.com/api/v2/Characters/`).then((resp) => resp.json())
         .then((characterList) => showCharacterList(characterList));
+
     })()
 
     function showCharacter(character){
@@ -40,8 +49,6 @@
 
         var list = document.querySelector("#characterList");
 
-        //document.querySelector('#ex3')
-
         characterList.forEach((element, index) => {
             
             var listItem = document.createElement("LI");
@@ -49,5 +56,4 @@
             listItem.innerHTML = `${index} ${element.fullName}`;
             list.appendChild(listItem)
         });
-
     }
