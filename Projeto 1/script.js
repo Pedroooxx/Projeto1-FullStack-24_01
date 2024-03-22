@@ -1,59 +1,65 @@
 
-    const button1 = document.getElementById('confirm');
-    button1.addEventListener("click", getCharacter);
-
-    function getCharacter(){
-        let input = document.getElementById("inputArea1").value;
-        let list = document.querySelector("#characterList");
-
-        list.forEach((element, index) => {
-            
-            
-        });
+const button1 = document.getElementById('confirm');
+button1.addEventListener("click", getCharacter);
 
 
-        return showCharacter(character);
-        /*fetch(`https://thronesapi.com/api/v2/Characters/${input}`).then((resp) => resp.json())
-        .then((character) => showCharacter(character));*/
-    }
+let characterList = (function listItem(id, name) {
+    this.id = id,
+    this.name = name
+})
 
-    (function getCharacterList(){
+function getCharacter(){
 
-        fetch(`https://thronesapi.com/api/v2/Characters/`).then((resp) => resp.json())
-        .then((characterList) => showCharacterList(characterList));
+    let input = document.getElementById("inputArea1").value;
 
-    })()
+    console.log(characterList.value)
+    //characterList.find()
 
-    function showCharacter(character){
+    fetch(`https://thronesapi.com/api/v2/Characters/${input}`).then((resp) => resp.json())
+    .then((character) => showCharacter(character));
 
-        let characterName = document.getElementById("characterName");
-        characterName.innerHTML = `${character.firstName} ${character.lastName}`;
+    //return showCharacter(character);
+}
 
-        let characterTitle = document.getElementById("characterTitle");
-        characterTitle.innerHTML = `${character.title}`;
+(function getCharacterList(){
 
-        let characterFullname = document.getElementById("characterFullname");
-        characterFullname.innerHTML = `${character.fullName}`;
+    fetch(`https://thronesapi.com/api/v2/Characters/`).then((resp) => resp.json())
+    .then((characterList) => showCharacterList(characterList));
 
-        let characterFamily = document.getElementById("characterFamily");
-        characterFamily.innerHTML = `${character.family}`;
+})()
 
-        let characterId = document.getElementById("characterId");
-        characterId.innerHTML = `${character.id}`;
+function showCharacter(character){
 
-        document.getElementById("characterImage").src = character.imageUrl;
+    let characterName = document.getElementById("characterName");
+    characterName.innerHTML = `${character.firstName} ${character.lastName}`;
 
-    }
+    let characterTitle = document.getElementById("characterTitle");
+    characterTitle.innerHTML = `${character.title}`;
 
-    function showCharacterList(characterList){
+    let characterFullname = document.getElementById("characterFullname");
+    characterFullname.innerHTML = `${character.fullName}`;
 
-        var list = document.querySelector("#characterList");
+    let characterFamily = document.getElementById("characterFamily");
+    characterFamily.innerHTML = `${character.family}`;
 
-        characterList.forEach((element, index) => {
-            
-            var listItem = document.createElement("LI");
-            listItem.className = "characterListItem"
-            listItem.innerHTML = `${index} ${element.fullName}`;
-            list.appendChild(listItem)
-        });
-    }
+    let characterId = document.getElementById("characterId");
+    characterId.innerHTML = `${character.id}`;
+
+     document.getElementById("characterImage").src = character.imageUrl;
+
+}
+
+function showCharacterList(characterList){
+
+    var list = document.querySelector("#characterList");
+
+    characterList.forEach((element, index) => {
+
+        let character = new listItem(index, element)
+                
+        var listItem = document.createElement("LI");
+        listItem.className = "characterListItem"
+        listItem.innerHTML = `${index} ${element.fullName}`;
+        list.appendChild(listItem)
+    });
+}
