@@ -2,23 +2,36 @@
 const button1 = document.getElementById('confirm');
 button1.addEventListener("click", getCharacter);
 
-
-let characterList = (function listItem(id, name) {
-    this.id = id,
-    this.name = name
-})
-
-function getCharacter(){
+function getCharacter() {
 
     let input = document.getElementById("inputArea1").value;
+    document.getElementById("inputArea1").value = "";
 
-    console.log(characterList.value)
-    //characterList.find()
+    if (!isNaN(input) && characterList[input]) {
+        fetch(`https://thronesapi.com/api/v2/Characters/${input}`)
+            .then((resp) => resp.json())
+            .then((character) => showCharacter(character))
+            .catch((error) => {
+                console.error('Erro no fetch:', error);
+            });
+            document.getElementById("inputArea1").placeholder = 'Personagem Encontrado.';
+    } else {
 
-    fetch(`https://thronesapi.com/api/v2/Characters/${input}`).then((resp) => resp.json())
-    .then((character) => showCharacter(character));
+        const character = characterList.find(({ fullName }) => fullName === input);
 
-    //return showCharacter(character);
+        if (character) {
+            fetch(`https://thronesapi.com/api/v2/Characters/${character.id}`)
+                .then((resp) => resp.json())
+                .then((character) => showCharacter(character))
+                .catch((error) => {
+                    console.error('Erro no fetch:', error);
+                });
+                document.getElementById("inputArea1").placeholder = 'Personagem Encontrado.';
+
+        } else {
+            document.getElementById("inputArea1").placeholder = 'Personagem não encontrado.';
+        }
+    }
 }
 
 (function getCharacterList(){
@@ -49,17 +62,19 @@ function showCharacter(character){
 
 }
 
-function showCharacterList(characterList){
+let characterList = []
 
-    var list = document.querySelector("#characterList");
+function showCharacterList(serverCharacterList){
 
-    characterList.forEach((element, index) => {
+    let list = document.querySelector("#characterList");
 
-        let character = new listItem(index, element)
-                
+    characterList = serverCharacterList;
+
+    serverCharacterList.forEach((element, index) => {
+
         var listItem = document.createElement("LI");
         listItem.className = "characterListItem"
         listItem.innerHTML = `${index} ${element.fullName}`;
-        list.appendChild(listItem)
+        list.appendChild(listItem);
     });
 }

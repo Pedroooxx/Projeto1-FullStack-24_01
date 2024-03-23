@@ -183,6 +183,7 @@
 .characterListItem {
     display: flex;
     justify-content: left;
+    list-style-type: decimal;
     font-size: 120%;
     margin: 10px 0px 0px 10px;
 }
@@ -223,7 +224,7 @@
     }
 }
 
-#footer1 {
+#homeFooter {
     position:relative;
     z-index:1000;
     bottom:0px;
