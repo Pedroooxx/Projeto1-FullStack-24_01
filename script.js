@@ -3,8 +3,7 @@ const button1 = document.getElementById('confirm');
 button1.addEventListener("click", getCharacter);
 
 function getCharacter() {
-
-    let input = document.getElementById("inputArea1").value;
+    let input = document.getElementById("inputArea1").value.toLowerCase(); // Convertendo a entrada do usuário para minúsculas
     document.getElementById("inputArea1").value = "";
 
     if (!isNaN(input) && characterList[input]) {
@@ -14,10 +13,9 @@ function getCharacter() {
             .catch((error) => {
                 console.error('Erro no fetch:', error);
             });
-            document.getElementById("inputArea1").placeholder = 'Personagem Encontrado.';
+        document.getElementById("inputArea1").placeholder = 'Personagem Encontrado.';
     } else {
-
-        const character = characterList.find(({ fullName }) => fullName === input);
+        const character = characterList.find(({ fullName }) => fullName.toLowerCase() === input); // Convertendo o nome do personagem para minúsculas
 
         if (character) {
             fetch(`https://thronesapi.com/api/v2/Characters/${character.id}`)
@@ -26,7 +24,7 @@ function getCharacter() {
                 .catch((error) => {
                     console.error('Erro no fetch:', error);
                 });
-                document.getElementById("inputArea1").placeholder = 'Personagem Encontrado.';
+            document.getElementById("inputArea1").placeholder = 'Personagem Encontrado.';
 
         } else {
             document.getElementById("inputArea1").placeholder = 'Personagem não encontrado.';
